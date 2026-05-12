@@ -1,7 +1,7 @@
 # STUDIO_CONSULENZE_AZIENDALI_INTEGRATE.md — Progetto Cliente
 > Parent: `CLAUDE.md`
 > Ultimo aggiornamento: Maggio 2026
-> Stato: 🟡 IN PROSPECTING — Fascicolo completato, file .md creato, prompt Cursor pronto. In attesa di inviare proposta commerciale.
+> Stato: 🟡 IN PROSPECTING — Sito sviluppato e build completata senza errori. In attesa di inviare proposta commerciale al cliente.
 
 ---
 
@@ -142,18 +142,60 @@ Istituzionale premium — stile studio notarile/legale moderno. Bianco/navy/oro.
 |---|---|---|
 | Ricerca e fascicolo cliente | ✅ Completato | Via Perplexity |
 | File .md ClaudesBrain | ✅ Creato | Questo file |
-| Prompt Cursor pronto | ✅ Pronto | Generato in chat |
-| **Proposta commerciale (email)** | 🔴 **DA INVIARE** | Bozza nel fascicolo Perplexity |
+| Sviluppo sito (demo) | ✅ Completato | Build Astro senza errori — vedi struttura sotto |
+| **Proposta commerciale (email)** | 🔴 **DA INVIARE** | — |
 | Accettazione proposta | ⬜ In attesa | — |
 | Preventivo .docx | ⬜ Da generare | Solo dopo accettazione — usare carta intestata Alvenco |
 | Contratto | ⬜ Da generare | Template Alvenco v2 |
 | Kick-off — raccolta info | ⬜ — | Team, servizi reali, foto, anno fondazione |
-| Sviluppo sito | ⬜ — | Cursor + Vercel |
-| Deploy e consegna | ⬜ — | — |
+| Personalizzazione TODO: | ⬜ — | Vedi checklist go-live sotto |
+| Deploy Vercel + dominio | ⬜ — | — |
 
 ---
 
-## 9. NOTE OPERATIVE
+## 9. STRUTTURA PROGETTO SVILUPPATO
+
+```
+src/
+├── content/
+│   └── it.ts               ← tutti i testi centralizzati con marcatori TODO:
+├── layouts/
+│   └── BaseLayout.astro    ← HTML shell, SEO, JSON-LD LocalBusiness, slot head
+├── components/
+│   ├── Header.astro        ← sticky, logo testuale, nav active, hamburger mobile
+│   ├── Footer.astro        ← 4 colonne, indirizzo, tel, copyright
+│   ├── Hero.astro          ← overlay scuro, Playfair bianco, CTA gold, stats strip
+│   ├── ServiceCard.astro   ← varianti compact/default con checklist
+│   ├── TeamMember.astro    ← foto placeholder grigia, struttura pronta
+│   ├── ContactForm.astro   ← Formspree-ready, select argomento, privacy checkbox
+│   └── FaqItem.astro       ← accordion accessibile (aria-expanded)
+├── pages/
+│   ├── index.astro         ← Hero + 3 servizi preview + "perché noi" + CTA banner
+│   ├── chi-siamo.astro     ← storia, valori numerati, approccio
+│   ├── servizi.astro       ← grid 6 card con checklist dettaglio
+│   ├── team.astro          ← 3 placeholder professionisti + sezione recruiting
+│   ├── contatti.astro      ← form + sidebar info + iframe mappa + click-to-call
+│   └── faq.astro           ← 6 accordion + FAQPage JSON-LD (rich snippets Google)
+└── styles/
+    └── global.css          ← @theme Tailwind v4, custom properties, componenti
+```
+
+---
+
+## 10. CHECKLIST GO-LIVE
+
+| File | Cosa fare |
+|---|---|
+| `src/content/it.ts` | Nome studio, anno fondazione, tel/email reali, nomi team, bio |
+| `astro.config.mjs` | Sostituire `https://TODO-studio-url.it` con dominio reale |
+| `src/components/ContactForm.astro` | Inserire endpoint Formspree reale (`https://formspree.io/f/XXXXXXXX`) |
+| `src/pages/contatti.astro` | Sostituire iframe Google Maps con coordinate reali |
+| `src/components/TeamMember.astro` | Caricare foto professionisti in `public/` |
+| `public/favicon.svg` | Sostituire con logo reale dello studio |
+
+---
+
+## 11. NOTE OPERATIVE
 
 - Tutti i testi reali marcati con `TODO:` nel codice per facilitare sostituzione post kick-off
 - Form contatti: sostituire `action="#"` con endpoint Formspree reale dopo contratto firmato
@@ -163,8 +205,9 @@ Istituzionale premium — stile studio notarile/legale moderno. Bianco/navy/oro.
 
 ---
 
-## 10. CHANGELOG
+## 12. CHANGELOG
 
 | Data | Aggiornamento |
 |---|---|
 | 2026-05-12 | File creato. Anagrafica, stack, architettura, design system, pipeline commerciale definiti. Stato: IN PROSPECTING. |
+| 2026-05-12 | Build Astro completata senza errori. Struttura progetto, checklist go-live aggiunte. Pipeline aggiornata. |
